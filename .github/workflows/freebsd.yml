@@ -29,11 +29,11 @@ jobs:
       with:
         usesh: true
         prepare: |
-          pkg install -y git go bash gmake
+          pkg install -y -q git cmake gmake gcc | tee build.log
         run: |
           SHA=$(git rev-parse --short HEAD)
           sed -i '' 's/\(v[0-9]\.[0-9]\.[0-9]\)/\1-'"$SHA"'/' src/version.h
-          git clone https://github.com/tindy2013/subconverter.git
+          git clone https://github.com/gaoyuyun/subconverter.git
           cd subconverter
           chmod +x scripts/build.freebsd.release.sh
           bash scripts/build.freebsd.release.sh
